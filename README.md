@@ -99,7 +99,7 @@
       -마우스를 이용하여 화면상의 Restart 버튼을 누를 경우 Main Play 화면으로 이동한다.
       -마우스를 이용하여 화면상의 Quit 버튼을 누를 경우 프로그램이 종료된다.
       
-  ###**위의 State를 다이어그램으로 표현하면 다음과 같다.**
+  **위의 State를 다이어그램으로 표현하면 다음과 같다.**
   
   ![GameState](https://user-images.githubusercontent.com/70791450/94235999-7477f180-ff47-11ea-8932-7dbbe77b8ca4.JPG)
 
