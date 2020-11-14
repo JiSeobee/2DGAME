@@ -7,7 +7,6 @@ import life_gauge
 class Enemy:
     SIZE = 96
     def __init__(self, x, speed, level):
-        # self.pos = get_canvas_width() // 2, get_canvas_height() // 2
         self.x, self.y = x, get_canvas_height() + randint(1,Enemy.SIZE)
         self.dx, self.dy = 0, speed
         self.level = level
@@ -28,7 +27,6 @@ class Enemy:
     def update(self):
         self.time += gfw.delta_time
         self.fidx = int(self.time * 10 + 10) % 3
-        # self.x += self.dx
         self.y += self.dy * gfw.delta_time
 
         if self.y < -Enemy.SIZE:

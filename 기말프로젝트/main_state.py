@@ -3,6 +3,7 @@ from pico2d import *
 from player import Player
 from bullet import LaserBullet
 from score import Score
+from background import VertScrollBackground
 import gobj
 import enemy_gen
 import life_gauge
@@ -12,8 +13,15 @@ canvas_height = 800
 
 def enter():
     gfw.world.init(['bg', 'enemy', 'bullet', 'player', 'ui'])
+    
+    center = get_canvas_width() // 2, get_canvas_height() // 2
+    bg = VertScrollBackground('bg_01.png')
+    bg.speed = 100
+    gfw.world.add(gfw.layer.bg, bg)
+    
     global player
     player = Player()
+    player.bg = bg
     gfw.world.add(gfw.layer.player, player)
 
     global score
@@ -27,13 +35,13 @@ def enter():
 
 def check_enemy(e):
     if gobj.collides_box(player, e):
+        player.life-=50
         print('Player Collision', e)
         e.remove()
         return
 
     for b in gfw.gfw.world.objects_at(gfw.layer.bullet):
         if gobj.collides_box(b, e):
-            # print('Collision', e, b)
             dead = e.decrease_life(b.power)
             if dead:
                 score.score += e.level * 10
@@ -50,12 +58,11 @@ def update():
 
 def draw():
     gfw.world.draw()
-    # gobj.draw_collision_box()
+   
    
 
 def handle_event(e):
     global player
-    # prev_dx = boy.dx
     if e.type == SDL_QUIT:
         gfw.quit()
     elif e.type == SDL_KEYDOWN:

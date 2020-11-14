@@ -3,6 +3,7 @@ from pico2d import *
 import gfw
 from gobj import *
 from bullet import *
+import life_gauge
 
 class Player:
     KEY_MAP = {
@@ -13,7 +14,6 @@ class Player:
     }
     KEYDOWN_SPACE = (SDL_KEYDOWN, SDLK_SPACE)
     LASER_INTERVAL = 0.15
-    SPARK_INTERVAL = 0.03
     IMAGE_RECTS = [
         (  8, 0, 42, 80),
         ( 76, 0, 42, 80),
@@ -30,14 +30,14 @@ class Player:
     MAX_ROLL = 0.4
     SPARK_OFFSET = 28
 
-    #constructor
+
     def __init__(self):
-        # self.pos = get_canvas_width() // 2, get_canvas_height() // 2
         self.x, self.y = 250, 80
         self.dx = 0
         self.speed = 320
+        self.max_life = 300
+        self.life = self.max_life
         self.image = gfw.image.load(RES_DIR + '/player.png')
-        self.spark = gfw.image.load(RES_DIR + '/laser_0.png')
         self.src_rect = Player.IMAGE_RECTS[5]
         half = self.src_rect[2] // 2
         self.minx = half
@@ -50,12 +50,11 @@ class Player:
         self.laser_time = 0
         bullet = LaserBullet(self.x, self.y + Player.SPARK_OFFSET, 400)
         gfw.world.add(gfw.layer.bullet, bullet)
-        # print('bullets = ', len(LaserBullet.bullets))
 
     def draw(self):
         self.image.draw(self.x, self.y,90,90)
-        # if self.laser_time < Player.SPARK_INTERVAL:
-        #     self.spark.draw(self.x, self.y + Player.SPARK_OFFSET)
+        rate = self.life / self.max_life
+        life_gauge.draw(self.x,self.y//2,80,rate)
 
     def update(self):
         self.x += self.dx * self.speed * gfw.delta_time
@@ -83,13 +82,9 @@ class Player:
 
         self.roll_time = clamp(-Player.MAX_ROLL, self.roll_time, Player.MAX_ROLL)
 
-        # if self.roll_time
         roll = int(self.roll_time * 5 / Player.MAX_ROLL)
         self.src_rect = Player.IMAGE_RECTS[roll + 5]
 
-        # if self.src_rect != self.prev_rect:
-        #     print(roll, self.src_rect)
-        #     self.prev_rect = self.src_rect
 
     def handle_event(self, e):
         pair = (e.type, e.key)
@@ -100,6 +95,14 @@ class Player:
         hw = self.src_rect[2] / 2
         hh = self.src_rect[3] / 2
         return self.x - hw, self.y - hh, self.x + hw, self.y + hh
+    
+    def decrease_life(self, amount):
+        self.life -= amount
+        return self.life <= 0
+    
+    def remove(self):
+        if self.life==0:
+            pass
 
 if __name__ == "__main__":
     for (l,t,r,b) in Player.IMAGE_RECTS:
