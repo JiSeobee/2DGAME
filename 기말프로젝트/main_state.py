@@ -7,12 +7,13 @@ from background import VertScrollBackground
 import gobj
 import enemy_gen
 import life_gauge
+import skill_gauge
 
 canvas_width = 500
 canvas_height = 800
 
 def enter():
-    gfw.world.init(['bg', 'enemy', 'bullet', 'player', 'ui'])
+    gfw.world.init(['bg', 'enemy', 'bullet', 'player', 'ui','e_bullet'])
     
     center = get_canvas_width() // 2, get_canvas_height() // 2
     bg = VertScrollBackground('bg_01.png')
@@ -32,11 +33,12 @@ def enter():
     font = gfw.font.load(gobj.RES_DIR + '/segoeprb.ttf', 40)
 
     life_gauge.load()
+    skill_gauge.load()
 
 def check_enemy(e):
     if gobj.collides_box(player, e):
         player.life-=50
-        print('Player Collision', e)
+        print('몬스터와 충돌 hp -50감소', e)
         e.remove()
         return
 
@@ -45,6 +47,7 @@ def check_enemy(e):
             dead = e.decrease_life(b.power)
             if dead:
                 score.score += e.level * 10
+                player.skill +=50
                 e.remove()
             b.remove()
             return
