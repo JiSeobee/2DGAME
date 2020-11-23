@@ -227,3 +227,72 @@
            
   ### [프로젝트 진행(3) 결과물]
 ![캡처](https://user-images.githubusercontent.com/70791450/99947490-674a7800-2dbb-11eb-9b67-d9e6e954ce2e.JPG)
+
+
+
+
+-----------------------------------------------------
+# [Term Project 2 차 발표 중간점검]
+
+## **1.개발중인 게임 및 달성도**
+**개발중인 게임과 프로젝트 달성도는 다음과 같다.**
+![t2-1](https://user-images.githubusercontent.com/70791450/99959674-c8c81200-2dce-11eb-91e4-4cd20154008f.JPG)
+
+
+
+
+## **2. 커밋 횟수 및 커밋 내용**
+![t2-2](https://user-images.githubusercontent.com/70791450/99959040-b4cfe080-2dcd-11eb-97d8-9795551fc37a.JPG)
+
+
+
+
+## **3. class 간 동작 구성**
+![t2-3](https://user-images.githubusercontent.com/70791450/99959042-b6010d80-2dcd-11eb-927c-b2c76863cebb.JPG)
+
+
+
+
+
+## **4. class 별 코드**
+![14](https://user-images.githubusercontent.com/70791450/99959246-fc566c80-2dcd-11eb-928a-22cf13ab1e75.JPG)
+
+
+
+
+
+
+### **1)main_state**
+![t2-7](https://user-images.githubusercontent.com/70791450/99959136-d204af00-2dcd-11eb-8274-5a3a55f9037f.JPG)
+
+### **2)Player**
+![t2-8](https://user-images.githubusercontent.com/70791450/99959138-d335dc00-2dcd-11eb-96c3-01b5c2d2a7a9.JPG)
+
+
+![3535](https://user-images.githubusercontent.com/70791450/99959300-1bed9500-2dce-11eb-92e5-0baadb06ebac.JPG)
+### **3)Enemy**
+![t2-4](https://user-images.githubusercontent.com/70791450/99959280-11cb9680-2dce-11eb-9dd7-8bf53dd55b04.JPG)
+
+### **4)BackGround**
+![t2-6](https://user-images.githubusercontent.com/70791450/99959283-12642d00-2dce-11eb-8a8f-9309b2bc2945.JPG)
+
+## **5. 목표달성 점검**
+      1.원래대로라면 6주차의 메뉴구현까지 했어야 했음
+         =>다른 과목들의 중간고사의 장기화로 인해 그동안 제대로 신경을 못썼던 것 같다..
+         
+      2.커밋 횟수가 너무 적다.
+        =>커밋에 경우 어떤 특정 class 구현하면 바로 커밋을 하는 것이 아닌 어느 정도 일정치를 모운 다음에 
+          한번에 커밋하다 보니 횟수가 적었던 것 같다.
+          
+      3.개발 일정과 달라짐
+        =>구현하다가 막히다 보면 다른 것을 먼저 구현해보고 하다 보니 일정과 많이 달라지고,     
+          4,5주차에 맵 구현 이렇게 해 놓았지만 막상 개발하다 보면 맵 구현을 해놓고 거기에 캐릭터 오브젝트를 
+          올려놓고 그 다음 적 오브젝트 올려놓고 하다 보니 주차의 경계가 많이 허물어진 것 같다. 
+          
+      4.앞으로의 계획
+        => 더 잦은 커밋과 좀 더 신경써서 개발 마무리 짓기
+ ----------------------
+
+
+
+
