@@ -3,9 +3,13 @@ import gfw
 from gobj import *
 from random import * 
 import life_gauge
+from enemy_bullet import *
 
 class Enemy:
     SIZE = 96
+    Bullet_Interval = 0.8
+    Spark_offset=28
+    
     def __init__(self, x, speed, level):
         self.x, self.y = x, get_canvas_height() + randint(1,Enemy.SIZE)
         self.dx, self.dy = 0, speed
@@ -17,6 +21,14 @@ class Enemy:
         self.src_width = self.image.w // 8
         self.src_height = self.image.h
         self.time = 0
+        self.bullet_time=0
+
+    def fire(self):
+        self.bullet_time=0
+        Ebullet=EnemyBullet(self.x,self.y-Enemy.Spark_offset,400)
+        gfw.world.add(gfw.layer.e_bullet,Ebullet)
+
+
     def draw(self):
         sx = self.fidx * self.src_width
         self.image.clip_draw(sx,0, self.src_width, self.src_height, self.x, self.y,100,100)
@@ -28,6 +40,11 @@ class Enemy:
         self.time += gfw.delta_time
         self.fidx = int(self.time * 10 + 10) % 3
         self.y += self.dy * gfw.delta_time
+
+        self.bullet_time+=gfw.delta_time
+
+        if self.bullet_time>=Enemy.Bullet_Interval:
+            self.fire()
 
         if self.y < -Enemy.SIZE:
             self.remove()

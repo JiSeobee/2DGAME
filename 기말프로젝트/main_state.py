@@ -2,6 +2,7 @@ import gfw
 from pico2d import *
 from player import Player
 from bullet import LaserBullet
+from enemy_bullet import EnemyBullet
 from score import Score
 from background import VertScrollBackground
 import gobj
@@ -26,7 +27,7 @@ def enter():
     gfw.world.add(gfw.layer.player, player)
 
     global score
-    score = Score(canvas_width - 20, canvas_height - 50)
+    score = Score(canvas_width//2+40, canvas_height-20)
     gfw.world.add(gfw.layer.ui, score)
 
     global font
