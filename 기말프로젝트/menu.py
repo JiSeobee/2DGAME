@@ -14,6 +14,10 @@ def enter():
 	global font
 	font = gfw.font.load(gobj.RES_DIR + '/segoeprb.ttf', 30)
 
+	global music_bg
+	music_bg=load_music('res/dragon_flight2.mp3')
+	music_bg.play()
+
 
 def update():
 	pass
@@ -31,11 +35,13 @@ def handle_event(e):
 	elif(e.type, e.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
 		gfw.quit()
 	elif(e.type, e.key) == (SDL_KEYDOWN, SDLK_SPACE):
+		music_bg.stop()
 		gfw.push(main_state)
 
 def exit():
-	global bg
+	global bg, music_bg
 	del bg
+	del music_bg
 
 def pause():
 	pass

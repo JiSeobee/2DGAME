@@ -11,8 +11,11 @@ import life_gauge
 import skill_gauge
 import coin
 
+
 canvas_width = 500
 canvas_height = 800
+global music_bgm
+
 
 def enter():
     gfw.world.init(['bg', 'enemy', 'bullet', 'player', 'ui','e_bullet','coin'])
@@ -21,7 +24,16 @@ def enter():
     bg = VertScrollBackground('bg_01.png')
     bg.speed = 100
     gfw.world.add(gfw.layer.bg, bg)
+
+    global music_bgm,monster_bgm,attacked_bgm,coin_bgm
+    music_bgm=load_music('res/dragon_flight.mp3')
+    music_bgm.repeat_play()
     
+    monster_bgm=load_wav('res/monster_die.wav')
+    attacked_bgm=load_wav('res/attacked.wav')
+    coin_bgm=load_wav('res/coin.wav')
+
+
     global player
     player = Player()
     player.bg = bg
@@ -39,6 +51,7 @@ def enter():
 
 def check_enemy(e):
     if gobj.collides_box(player, e):
+        attacked_bgm.play()
         player.life-=50
         print('몬스터와 충돌 hp -50감소', e)
         e.remove()
@@ -50,6 +63,7 @@ def check_enemy(e):
             if dead:
                 score.score += e.level * 10
                 player.skill +=50
+                monster_bgm.play()
                 e.remove()
                 e.drop()
             b.remove()
@@ -58,6 +72,7 @@ def check_enemy(e):
 def check_enemy_attack(eb):
     for eb in gfw.gfw.world.objects_at(gfw.layer.e_bullet):
         if gobj.collides_box(eb,player):
+            attacked_bgm.play()
             player.life-=5
             eb.remove()
             return
@@ -65,6 +80,7 @@ def check_enemy_attack(eb):
 def check_coin(c):
     for c in gfw.gfw.world.objects_at(gfw.layer.coin):
         if gobj.collides_box(c,player):
+            coin_bgm.play()
             c.remove()
             return
 
@@ -92,6 +108,7 @@ def draw():
 def handle_event(e):
     global player
     if e.type == SDL_QUIT:
+        music_bgm.stop()
         gfw.quit()
     elif e.type == SDL_KEYDOWN:
         if e.key == SDLK_ESCAPE:
@@ -100,7 +117,8 @@ def handle_event(e):
     player.handle_event(e)
 
 def exit():
-    pass
+    global music_bgm,attacked_bgm,monster_bgm
+    del music_bgm,attacked_bgm,monster_bgm
 
 if __name__ == '__main__':
     gfw.run_main()
