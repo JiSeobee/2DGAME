@@ -4,6 +4,7 @@ from gobj import *
 from random import * 
 import life_gauge
 from enemy_bullet import *
+from coin import *
 
 class Enemy:
     SIZE = 96
@@ -27,6 +28,11 @@ class Enemy:
         self.bullet_time=0
         Ebullet=EnemyBullet(self.x,self.y-Enemy.Spark_offset,400)
         gfw.world.add(gfw.layer.e_bullet,Ebullet)
+
+    def drop(self):
+        Drop=Coin(self.x,self.y-Enemy.Spark_offset,400)
+        gfw.world.add(gfw.layer.coin,Drop)
+
 
 
     def draw(self):

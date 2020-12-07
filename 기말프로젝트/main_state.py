@@ -9,12 +9,13 @@ import gobj
 import enemy_gen
 import life_gauge
 import skill_gauge
+import coin
 
 canvas_width = 500
 canvas_height = 800
 
 def enter():
-    gfw.world.init(['bg', 'enemy', 'bullet', 'player', 'ui','e_bullet'])
+    gfw.world.init(['bg', 'enemy', 'bullet', 'player', 'ui','e_bullet','coin'])
     
     center = get_canvas_width() // 2, get_canvas_height() // 2
     bg = VertScrollBackground('bg_01.png')
@@ -50,6 +51,7 @@ def check_enemy(e):
                 score.score += e.level * 10
                 player.skill +=50
                 e.remove()
+                e.drop()
             b.remove()
             return
 
@@ -58,6 +60,12 @@ def check_enemy_attack(eb):
         if gobj.collides_box(eb,player):
             player.life-=5
             eb.remove()
+            return
+
+def check_coin(c):
+    for c in gfw.gfw.world.objects_at(gfw.layer.coin):
+        if gobj.collides_box(c,player):
+            c.remove()
             return
 
 
@@ -70,6 +78,9 @@ def update():
         check_enemy(e)
     for eb in gfw.world.objects_at(gfw.layer.e_bullet):
         check_enemy_attack(eb)
+
+    for c in gfw.world.objects_at(gfw.layer.coin):
+        check_coin(c)
 
 
 
