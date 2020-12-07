@@ -53,12 +53,25 @@ def check_enemy(e):
             b.remove()
             return
 
+def check_enemy_attack(eb):
+    for eb in gfw.gfw.world.objects_at(gfw.layer.e_bullet):
+        if gobj.collides_box(eb,player):
+            player.life-=5
+            eb.remove()
+            return
+
+
+
 def update():
     gfw.world.update()
     enemy_gen.update()
 
     for e in gfw.world.objects_at(gfw.layer.enemy):
         check_enemy(e)
+    for eb in gfw.world.objects_at(gfw.layer.e_bullet):
+        check_enemy_attack(eb)
+
+
 
 def draw():
     gfw.world.draw()
