@@ -5,6 +5,8 @@ from gobj import *
 from bullet import *
 import life_gauge
 import skill_gauge
+import result
+import main_state
 
 class Player:
     speed=320
@@ -43,7 +45,8 @@ class Player:
             self.fire()
             
         if self.life<=0:
-            gfw.quit()
+            gfw.pop()
+            gfw.push(result)
 
     def handle_event(self, e):
         if e.type == SDL_KEYDOWN:

@@ -3,8 +3,8 @@ import gfw
 import gobj
 import main_state
 
-canvas_width=main_state.canvas_width
-canvas_height=main_state.canvas_height 
+canvas_width=500
+canvas_height=800
 
 
 def enter():

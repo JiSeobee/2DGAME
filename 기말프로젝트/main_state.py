@@ -1,6 +1,6 @@
 import gfw
 from pico2d import *
-from player import Player
+from player import *
 from bullet import LaserBullet
 from enemy_bullet import EnemyBullet
 from score import Score
@@ -18,7 +18,7 @@ global music_bgm
 
 
 def enter():
-    gfw.world.init(['bg', 'enemy', 'bullet', 'player', 'ui','e_bullet','coin'])
+    gfw.world.init(['bg', 'enemy', 'bullet', 'player', 'ui','e_bullet','coin',])
     
     center = get_canvas_width() // 2, get_canvas_height() // 2
     bg = VertScrollBackground('bg_01.png')
@@ -48,6 +48,7 @@ def enter():
 
     life_gauge.load()
     skill_gauge.load()
+
 
 def check_enemy(e):
     if gobj.collides_box(player, e):
